@@ -37,13 +37,11 @@ block con
                                 li.col-lg-2.col-md-2.col-sm-2.col-xs-2.del 删除
         .panel
             #subPanel.subPanel
-                ul
-                    li#newSingle single
-                    li#newMultiple multiple
-                    li#newText text
+                ul.row
+                    li#newSingle.col-lg-3.col-md-3.col-sm-3.col-xs-3 single
+                    li#newMultiple.col-lg-3.col-md-3.col-sm-3.col-xs-3 multiple
+                    li#newText.col-lg-3.col-md-3.col-sm-3.col-xs-3 text
             button#newQu.newQu + New Question
-        button#save save
-    button#clear clear
-    button#show show
+        button#save.save save
     script(src="/javascript/edit.js")
     script(src="/javascript/common.js")

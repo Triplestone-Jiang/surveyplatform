@@ -1,18 +1,17 @@
-var data = {};
-var a=0;
 (function () {
     var $ = function (s) {
         return document.querySelector(s);
     };
+    var data = {};
     var questions = $('#questions');
     var newSingle = $('#newSingle');
     var newMultiple = $('#newMultiple');
     var newText = $('#newText');
-    var title = $('#title').value;
+    var title = $('#title');
     var save = $('#save');
     var order = 1;
     var questionAll = document.getElementsByClassName('question');
-    console.log(++a);
+    save.onclick = stringFyData;
     questions.addEventListener("click", function (event) {
         var p = event.target.parentNode.parentNode.parentNode;
         var o = +p.firstElementChild.innerText.slice(1);
@@ -113,10 +112,9 @@ var a=0;
         order++;
     }
 
-    save.onclick = stringFyData;
     function stringFyData() {
         order = questionAll.length;
-        data.title = title;
+        data.title = title.value.trim();
         data.len = order;
         var item = "",
             type = "",
@@ -153,58 +151,24 @@ var a=0;
                 }
             }
         }
-        var jsonData=JSON.stringify(data);
-        console.log(data,jsonData);
-        var xhr=new XMLHttpRequest();
-        xhr.open("post","",false);
-        xhr.setRequestHeader("Content-Type","application/json");
+        var jsonData = JSON.stringify(data);
+        console.log(data, jsonData);
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                    if (xhr.responseText === "OK") {
+                        $$('success').show();
+                    } else {
+                        $$('error').show();
+                    }
+                } else {
+                    alert("Request was unsuccessful: " + xhr.status);
+                }
+            }
+        };
+        xhr.open("post", "", false);
+        xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(jsonData);
     }
-})();
-(function () {
-    var clr = document.getElementById("clear");
-    var show = document.getElementById("show");
-    var container = document.getElementById("container");
-
-    function parseData() {
-        var html = '<label for="title"></label>' +
-            '<input type="text" name="title" id="title" value="' + data.title + '">';
-        for (var i = 0; i < data.len; i++) {
-            var choices = data['Q' + (i + 1)].choices;
-            html += '<div class="question clearFix">' +
-                '<div class="order">' + 'Q' + (i + 1) + '</div>' +
-                '<div class="quContent"><input type="text" class="describe" value="' + data['Q' + (i + 1)].describe + '"><br />';
-            if (data['Q' + (i + 1)].type === "single") {
-                for (var j = 0; j < choices.length; j++) {
-                    html += '<input type="checkbox">' +
-                        '<input type="text" value="' + choices[j] + '" class="option"><br />';
-                }
-
-            } else if (data['Q' + (i + 1)].type === "multiple") {
-                for (j = 0; j < choices.length; j++) {
-                    html += '<input type="radio">' +
-                        '<input type="text" value="' + choices[j] + '" class="option"><br />';
-                }
-            } else {
-                html += '<textarea></textarea>';
-            }
-            html += '</div>' +
-                '<div class="menu">' +
-                '<ul>' +
-                '<li class="moveUp">move up</li>' +
-                '<li class="moveDown">move down</li>' +
-                '<li class="copy">copy</li>' +
-                '<li class="del">delete</li>' +
-                '<li class="addNew">add new choice</li>' +
-                '</ul>' +
-                '</div>' +
-                '</div>';
-            container.innerHTML = html;
-        }
-    }
-
-    clr.onclick = function () {
-        container.innerHTML = "";
-    };
-    show.onclick = parseData;
 })();

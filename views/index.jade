@@ -1,5 +1,34 @@
 extends layout
 
 block con
-  h1
-  p Welcome to
+  - var array=questionList
+  div.container.indexContainer
+    table#questionList.questionList
+      thead
+        tr.list-row.row
+          td.radio.col-lg-1
+          td.col-lg-4 TITLE
+          td.col-lg-2 TIME
+          td.col-lg-1 STATE
+          td.col-lg-4
+            button.list-new-question New Questionnaire
+      tbody
+        each val,index in array
+          tr.list-row.row
+            td.radio.col-lg-1
+              input.list-radio(type="checkbox")
+            td.col-lg-4.list-title=val
+            td.col-lg-2.list-time sometime
+            td.col-lg-1.list-state published
+            td.col-lg-4
+              button Edit
+              button Delete
+              button View
+      tfoot
+        tr.list-row.row
+          td.radio.col-lg-1
+            input.list-radio(type="checkbox")
+          td Select All
+          td
+            button Delete Selected
+  script(src="/javascript/list.js")

@@ -1,0 +1,27 @@
+extends layout
+
+block con
+    #container.container.form-group
+        h1=obj.title
+        #questions.questions
+            each v,o in obj
+                if o.charAt(0)==="Q"
+                    - var choices=obj[o].choices
+                    .question.clearFix.row.view
+                        .order.col-lg-1.col-md-1.col-sm-1.col-xm-1=o
+                        .quContent.col-lg-5.col-md-5.col-sm-12.col-xm-12
+                            h3=obj[o].describe
+                            br
+                            if obj[o].type === "checkbox"
+                                each val, index in choices
+                                    input.form-control(type='checkbox' name='checkbox')
+                                    span=val
+                                    br
+                            if obj[o].type === "radio"
+                                each val, index in choices
+                                    input.form-control(type='radio' name='radio')
+                                    span=val
+                                    br
+                            if obj[o].type === "text"
+                                textarea.text.form-control
+        button#submit.submit Submit

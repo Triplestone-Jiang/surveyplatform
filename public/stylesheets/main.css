@@ -3,7 +3,6 @@
     font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
 }
 html{
-    background-color: #efefef;
     cursor: default;
 }
 .clearFix:before,
@@ -30,7 +29,10 @@ header p{
 .container{
     text-align: center;
     box-shadow: 1px 1px 3px #888888;
+    padding: 0 0 30px 0;
 }
+
+/*For edit.jade*/
 #title{
     text-align: center;
     outline: none;
@@ -46,7 +48,7 @@ header p{
 .quContent input[type="checkbox"],.quContent input[type="radio"]{
     height: 20px;
     width: 20px;
-    margin: 10px 5px 0 0 ;
+    margin: 10px 5px 0 0;
 }
 .quContent input.describe[type="text"],.quContent textarea{
     margin:0 0 10px 25px;
@@ -56,6 +58,12 @@ i.icon-plus-sign, i.icon-minus-sign{
     cursor: pointer;
     display: inline-block;
     margin: 0 5px;
+}
+.questions{
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+    padding: 0 15px;
 }
 
 .question{
@@ -105,16 +113,103 @@ i.icon-plus-sign, i.icon-minus-sign{
     margin: 10px auto;
     font-size: 16px;
     line-height: 30px;
-    color:#ee7419;
     list-style: none;
 }
-.subPanel ul li{
-    display: inline-block;
-    margin: 0 30px;
+.subPanel ul li,.save,.submit{
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    color:#ee7419;
+    margin: 0 10px;
     border: 1px solid #ee7419;
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     border-radius:3px;
     padding: 0 6px;
     cursor: pointer;
+    background-color: white;
 }
+.subPanel ul li:hover,.save:hover,.submit:hover{
+    color:white;
+    background-color:#ee7419;
+}
+.save,.submit{
+    width:100px;
+    height:30px;
+    font-size: 20px;
+}
+/*for index.jade*/
+.indexContainer{
+    margin:100px auto;
+    padding: 0;
+}
+.questionList{
+    width: 100%;
+
+}
+.questionList tr{
+    font-size: 20px;
+    line-height: 60px;
+    height:60px;
+    border-bottom: 1px solid #bdc3c7;
+}
+.questionList button{
+    font-size: 14px;
+    border-radius: 5px;
+    margin: 16px 4px;
+    line-height: 26px;
+    border: 1px solid chocolate;
+    color:chocolate;
+    background-color: white;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.questionList thead tr{
+    background-color: #ee7419;
+    color:white;
+    border: none;
+}
+.questionList thead tr button{
+    width: 180px;
+}
+.questionList tbody tr{
+    color:#888888;
+}
+.questionList tbody tr button{
+    width: 70px;
+}
+.questionList tbody tr:hover {
+    background-color: #fcf0e5;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.questionList tfoot tr{
+    color:#888888;
+    border: none;
+}
+.questionList td.radio{
+    text-align: right;
+}
+
+.questionList button:hover{
+    border: 1px solid white;
+    color:white;
+    background-color: chocolate;
+
+}
+.list-radio{
+
+}
+/*for view.jade*/
+.view h3{
+    color:#888888;
+    font-size: 24px;
+    line-height: 26px;
+    margin: 0;
+}.view .quContent span{
+    font-size: 20px;
+    color:#888888;
+ }

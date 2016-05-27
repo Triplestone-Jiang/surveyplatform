@@ -1,6 +1,6 @@
 {
-  "name": "sever",
-  "version": "0.0.0",
+  "name": "surveyPlatform",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
