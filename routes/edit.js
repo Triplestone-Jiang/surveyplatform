@@ -27,7 +27,9 @@ router.post('/', function (req, res) {
         var title = req.body['title'];
         arr.forEach(function (item) {
             if (title === JSON.parse(item['obj'])['title'].trim()) {
-                db.remove({'obj': item['obj']});
+                db.remove({'obj': item['obj']},function (err) {
+                    console.log(err);
+                });
             }
         });
         var data = JSON.stringify(req.body);

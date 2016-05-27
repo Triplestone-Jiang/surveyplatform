@@ -22,7 +22,9 @@ router.post('/', function (req, res) {
         data.forEach(function (item) {
             obj.forEach(function (item1) {
                 if (item === JSON.parse(item1['obj'])['title'].trim()) {
-                    db.remove({'obj': item1['obj']});
+                    db.remove({'obj': item1['obj']},function (err) {
+                        console.log(err);
+                    });
                 }
             })
         });
